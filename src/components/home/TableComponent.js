@@ -61,6 +61,10 @@ class TableComponent extends React.Component {
             }
           ]}
           className='-striped -highlight'
+          defaultPageSize={32}
+          style={{
+            height: '100vh'
+          }}
         />
       </div>
     );

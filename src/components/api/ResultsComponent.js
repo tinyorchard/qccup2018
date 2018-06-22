@@ -51,7 +51,7 @@ function prepDataForTable(data) {
 }
 
 export function getGroupResults() {
-  return fetch('http://worldcup.sfg.io/teams/group_results').then(
+  return fetch('//worldcup.sfg.io/teams/group_results').then(
     function(response) {
       if (response.status !== 200) {
         console.log('Looks like there was a problem. Status Code: ' +
