@@ -4,28 +4,11 @@ import _ from 'lodash';
 
 function flattenTeams(groups) {
   return _.flatten(_.map(groups, (item) => {
-    return item.group.teams
+    return item.ordered_teams
   }));
 }
 
-function decorateTeams(teams) {
-  return _.each(teams, (team) => {
-    debugger
-    groupFromTeam(team);
-    // addContestantToTeams(team);
-  });
-}
-
-function groupFromTeam(team) {
-
-  // get the list of groups
-  // find the team in that list
-
-
-  return _.extend({}, team, { team: { group: 'UNKNOWN' } });
-}
-
-function addContestantToTeams(team) {
+export function getContestantFromGroup(group) {
   const contestants = {
     A: 'Mikayla',
     B: 'Tom',
@@ -37,17 +20,7 @@ function addContestantToTeams(team) {
     H: 'Matty'
   };
 
-  return '';//_.assign(team, { _.where() });
-}
-
-function prepDataForTable(data) {
-  const flatTeams = flattenTeams(data);
-  const decoratedTeams = decorateTeams(flatTeams);
-
-  // debugger
-
-  const allTeams = flatTeams;
-  return allTeams;
+  return contestants[group];
 }
 
 export function getGroupResults() {
@@ -61,8 +34,7 @@ export function getGroupResults() {
 
       // Examine the text in the response
       return response.json().then(function(data) {
-        console.log(data);
-        return prepDataForTable(data);
+        return flattenTeams(data);
       });
     }
   )

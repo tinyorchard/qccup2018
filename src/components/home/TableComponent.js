@@ -1,34 +1,47 @@
-require('react-table/react-table.css');
-
 import React from 'react';
 import ReactTable from 'react-table'
-import { getTeamResults, getGroupResults } from '../api/ResultsComponent.js'
-// import { get } from '../api/ResultsComponent.js'
+import { getGroupResults, getContestantFromGroup } from '../api/ResultsComponent'
 
+require('react-table/react-table.css');
 require('styles/home/Table.css');
 
 class TableComponent extends React.Component {
   componentDidMount() {
-    // const columns = getGroupStageColumns();
     const groupColumns = [
       {
         Header: 'Team',
         id: 'teamName',
-        accessor: i => i.team.country
+        accessor: team => team.country
+      },
+      {
+        Header: 'Who',
+        id: 'team_owner',
+        accessor: team => getContestantFromGroup(team.group_letter)
       },
       {
         Header: 'Points',
         id: 'points',
-        accessor: i => i.team.points
+        accessor: team => team.points
       },
       {
         Header: 'Goal Diff',
         id: 'goal_differential',
-        accessor: i => i.team.goal_differential
+        accessor: team => team.goal_differential
       }
     ];
 
-    this.setState({ groupColumns });
+    const defaultSorting = [
+      {
+        id: 'points',
+        desc: true
+      },
+      {
+        id: 'goal_differential',
+        desc: true
+      }
+    ];
+
+    this.setState({ groupColumns, defaultSorting });
 
     getGroupResults().then((data) => {
       this.setState({ groupResults: data });
@@ -42,26 +55,22 @@ class TableComponent extends React.Component {
       );
     }
 
-    const { groupResults, teamResults, teamColumns, groupColumns } = this.state;
-    console.log('state', this.state)
+    const {
+            groupResults,
+            teamResults,
+            teamColumns,
+            groupColumns,
+            defaultSorting
+          } = this.state;
 
     return (
       <div className='table-component'>
         <ReactTable
           data={groupResults}
           columns={groupColumns}
-          defaultSorted={[
-            {
-              id: "points",
-              desc: true
-            },
-            {
-              id: "goal_differential",
-              desc: true
-            }
-          ]}
+          defaultSorted={defaultSorting}
           className='-striped -highlight'
-          defaultPageSize={32}
+          showPagination={false}
           style={{
             height: '100vh'
           }}
