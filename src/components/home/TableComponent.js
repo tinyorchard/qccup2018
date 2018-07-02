@@ -57,8 +57,6 @@ class TableComponent extends React.Component {
 
     const {
             groupResults,
-            teamResults,
-            teamColumns,
             groupColumns,
             defaultSorting
           } = this.state;
@@ -71,9 +69,7 @@ class TableComponent extends React.Component {
           defaultSorted={defaultSorting}
           className='-striped -highlight'
           showPagination={false}
-          style={{
-            height: '100vh'
-          }}
+          defaultPageSize={32}
         />
       </div>
     );

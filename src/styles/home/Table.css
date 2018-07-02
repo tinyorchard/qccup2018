@@ -2,7 +2,3 @@
   margin: auto;
   max-width: 1000px;
 }
-
-.ReactTable .rt-thead {
-  overflow-y: scroll;
-}
