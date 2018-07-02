@@ -11,13 +11,13 @@ function flattenTeams(groups) {
 export function getContestantFromGroup(group) {
   const contestants = {
     A: 'Mikayla',
-    B: 'Tom',
-    C: 'Josh',
-    D: 'Lucie',
-    E: 'Sienna',
-    F: 'Lynne',
+    B: 'Josh',
+    C: 'Matty',
+    D: 'Tom',
+    E: 'Lynne',
+    F: 'Sienna',
     G: 'Alf',
-    H: 'Matty'
+    H: 'Lucie'
   };
 
   return contestants[group];
